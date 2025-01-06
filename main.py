@@ -1,4 +1,3 @@
-
 import streamlit as st
 from PIL import Image
 import os
@@ -20,8 +19,15 @@ def split_image_into_tiles(image, tiles_width, tiles_height, output_folder="outp
             right = left + A4_WIDTH
             lower = upper + A4_HEIGHT
 
+            # Crop the tile
             tile = resized_image.crop((left, upper, right, lower))
-            tile.save(os.path.join(output_folder, f"tile_{row + 1}_{col + 1}.jpg"))
+
+            # Convert to RGB if necessary
+            if tile.mode == "RGBA":
+                tile = tile.convert("RGB")
+
+            # Save the tile as a JPEG
+            tile.save(os.path.join(output_folder, f"tile_{row + 1}_{col + 1}.jpg"), "JPEG")
 
     # Zip the folder
     shutil.make_archive(output_folder, 'zip', output_folder)
