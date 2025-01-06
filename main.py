@@ -3,27 +3,6 @@ from PIL import Image
 import os
 import shutil
 
-# Toggle for Dark/Light Mode
-theme = st.radio("Choose Theme", ["Light", "Dark"], index=0)
-
-if theme == "Dark":
-    st.markdown(
-        """
-        <style>
-            body {
-                background-color: #0e1117;
-                color: #ffffff;
-            }
-            .stApp {
-                background-color: #0e1117;
-                color: #ffffff;
-            }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
 def split_image_into_tiles(image, tiles_width, tiles_height, orientation, output_folder="output_tiles"):
     # A4 dimensions in pixels at 300 DPI
     if orientation == "Portrait":
